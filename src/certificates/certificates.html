@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="certificates.css">
+  <title>Certificados</title>
+</head>
+<body>
+  <header>
+    <h3>Panel de administracion</h3>
+    <nav>
+      <ul>
+        <li><a href="../dashboard/dashboard.html">Inicio</a></li>
+        <li><a href="../createForm/createFrom.html">Cargar datos</a></li>
+        <li>
+          <button id="close-session-btn" class="btn-danger">
+            Cerrar Sesion
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <div class="container">
+      <div id="certificado-container" class="card">
+        <h2>Generar Certificado</h2>
+        <br>
+        <p>
+          <span class="danger-text bold-text">Importante</span>
+          Genera un certificado para el/la estudiante, de tipo practica, matricula, o de conducta. Los estudiantes que no esten cursando sexto semeste en adelante no podran generar certificados de practicas.
+        </p>
+        <br>
+        <form id="certificado-form">
+          <div class="input-field">
+            <label for="tipo">Tipo de certificado</label>
+            <select name="certificado-type" id="certificado-type" title="seleccionar el tipo de certificado a generar">
+            </select>
+          </div>
+          <div class="btn-container">
+            <button type="submit" class="btn" id="certificado-btn">Generar certificado</button>
+          </div>
+          <br>
+          <div class="message-error" id="message-error"></div>
+          <br>
+          <div class="message-info message-info-hide" id="message-certificado-box"></div>
+        </form>
+
+      </div>
+    </div>
+  </main>
+  <script type="module" src="certificates.js"></script>
+</body>
+</html>

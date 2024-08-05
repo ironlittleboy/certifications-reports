@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Crear registro de estudiante</title>
+    <link rel="stylesheet" href="createForm.css" />
+  </head>
+  <body>
+    <header>
+      <h3>Panel de administracion</h3>
+      <nav>
+        <ul>
+          <li><a href="../dashboard/dashboard.html">Inicio</a></li>
+          <li><a href="../createForm/createFrom.html">Cargar datos</a></li>
+          <li>
+            <button id="close-session-btn" class="btn-danger">
+              Cerrar Sesion
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <div class="form-container">
+        <h2>Crear registro de estudiante</h2>
+
+        <span class="danger-text bold-text">Importante:</span>
+        <span class="gray-text"
+          >Aqui puedes crear un registro de un estudiante, recuerda que debes
+          tener en cuenta que el estudiante debe estar registrado en el sistema
+          para poder asignarle una practica.</span
+        >
+        <br>
+        <form id="student-form">
+          <div class="input-field">
+            <label for="name">Nombres</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              class="form-input"
+              placeholder="Escribe los nombres del estudiante"
+              required
+            />
+          </div>
+          <div class="input-field">
+            <label for="cedula">Cedula</label>
+            <input
+              type="text"
+              id="cedula"
+              name="cedula"
+              class="form-input"
+              placeholder="Escribe la cedula del estudiante"
+              required
+            />
+          </div>
+          <div class="input-field">
+            <label for="carrera">Carrera</label>
+            <input
+              type="text"
+              id="carrera"
+              name="carrera"
+              class="form-input"
+              placeholder="Escribe la carrera del estudiante"
+              required
+            />
+          </div>
+          <div class="input-field">
+            <label for="correo">Correo</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              class="form-input"
+              placeholder="Escribe el correo del estudiante"
+              required
+            />
+          </div>
+          <div class="input-field">
+            <label for="codigomatricula">Codigo Matricula</label>
+            <input type="text" id="codigomatricula" name="codigomatricula" placeholder="Codigo de matricula"/>
+          </div>
+          <div class="input-field">
+            <label for="periodo">Periodo</label>
+            <select name="periodo" id="periodo">
+              <option value="">Seleccionar un periodo</option>
+              <!-- generado con JS-->
+            </select>
+          </div>
+          <div class="input-field">
+            <label for="semestre">Semestre</label>
+            <select name="semestre" id="semestre">
+              <option value="">Seleccionar un semestre</option>
+              <!-- generado con JS-->
+            </select>
+          </div>
+          <div>
+            <button type="submit" class="btn">Crear estudiante</button>
+          </div>
+        </form>
+      </div>
+      <div class="form-container">
+        <div class="form-container-without-border">
+          <h2>Cargar datos</h2>
+          <form id="charge-form">
+            <div class="input-field">
+              <label for="data">Tipo de dato</label>
+              <select name="data" id="data">
+                <option value="">Seleccionar estudiantes o practicas</option>
+                <option value="students">Estudiantes</option>
+                <option value="practices">Practicas</option>
+              </select>
+              <span class="danger-text bold-text">Importante:</span>
+              <span class="gray-text"
+                >Aqui puedes subir un archivo tipo XLSX, de lo que elijas, puede
+                ser para cargar estudiantes o practicas de estudiantes.</span
+              >
+            </div>
+            <div class="input-field">
+              <label for="file">Archivo</label>
+              <input
+                type="file"
+                id="file"
+                name="file"
+                class="form-input"
+                required
+              />
+            </div>
+            <div>
+              <button type="submit" class="btn">Cargar datos</button>
+            </div>
+          </form>
+        </div>
+        <div class="form-container-without-border">
+          <h2>Crear periodo academico</h2>
+          <br>
+          <form id="period-form">
+            <div class="input-field">
+              <label for="periodo">Nombre del Periodo</label>
+              <input
+                type="text"
+                id="periodo"
+                name="periodo"
+                class="form-input"
+                placeholder="Escribe el nombre del periodo"
+                required
+              />
+            </div>
+            <div class="input-field">
+              <label for="fechainicio">Fecha de inicio</label>
+              <input
+                type="date"
+                id="fechainicio"
+                name="fechainicio"
+                class="form-input"
+                required
+              />
+            </div>
+            <div class="input-field">
+              <label for="fechafin">Fecha de fin</label>
+              <input
+                type="date"
+                id="fechafin"
+                name="fechafin"
+                class="form-input"
+                required
+              />
+            </div>
+            <div>
+              <button type="submit" class="btn">Crear periodo</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </main>
+    <script type="module" src="createForm.js"></script>
+  </body>
+</html>

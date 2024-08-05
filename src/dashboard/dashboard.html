@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel de administracion</title>
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+  <header>
+    <h3>Panel de administracion</h3>
+    <nav>
+      <ul>
+        <li><a href="dashboard.html">Inicio</a></li>
+        <li><a href="../createForm/createForm.html">Cargar datos</a></li>
+        <li>
+          <button id="close-session-btn" class="btn-danger" >
+            Cerrar Sesion
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <h2>Panel de administracion</h2>
+    <section>
+      <div class="filtros">
+        <div class="filter-input-container">
+          <label for="periodo">Filtrar por periodo</label>
+          <select name="periodo" id="periodo">
+            <option value="all">Seleccionar un periodo</option>
+            <!-- generate by JS the others periods -->
+          </select>
+        </div>
+        <div class="filter-input-container">
+          <label for="filter-select">Buscar por</label>
+          <select name="filter-select" id="filter-select">
+            <option value="name">Nombres</option>
+            <option value="cedula">Cedula</option>
+          </select>
+          <label for="filter-input"></label>
+          <input type="text" id="filter-input" name="filter-input" class="filter-input" placeholder="Escribe la busqueda aqui">
+          <button class="btn" id="filter-button">
+            Buscar
+          </button>
+        </div>
+      </div>
+      <h2 class="primary-color">Listado de Estudiantes</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombres</th>
+            <th>Cedula</th>
+            <th>Carrera</th>
+            <th>Correo</th>
+            <th>Semestre</th>
+            <th>Periodo</th>
+            <th>Codigo Matricula</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="tbody-table">
+          <!-- generate by JS the rows -->
+
+        </tbody>
+      </table>
+    </section>
+  </main>
+  <script type="module" src="dashboard.js"></script>
+</body>
+</html>
