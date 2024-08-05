@@ -33,6 +33,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       document.getElementById('report-btn').removeAttribute('disabled');
       document.getElementById('message-report-box').textContent = '';
       document.getElementById('message-report-box').style.display = 'none';
+      window.location.reload();
   
     });
   
@@ -45,6 +46,8 @@ document.addEventListener('DOMContentLoaded', async () => {
       document.getElementById('report-btn').removeAttribute('disabled');
       document.getElementById('message-report-box').textContent = '';
       document.getElementById('message-report-box').style.display = 'none';
+      window.location.reload();
+
     }); // Cerrar el modal cuando se hace clic en el botón de cerrar
   
     // Cerrar el modal cuando se hace clic fuera del formulario
