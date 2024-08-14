@@ -190,15 +190,20 @@ document.getElementById("periodo").addEventListener("change", async (event) => {
 
 // Filter students
 document.getElementById("filter-button").addEventListener("click", async () => {
-  const inputFilter = document.getElementById("filter-input").value;
+  let inputFilter = document.getElementById("filter-input").value;
   const tableBody = document.querySelector("#tbody-table");
   const filterSelect = document.getElementById("filter-select").value;
   // console.log(inputFilter);
+  if (inputFilter === "" && filterSelect === "cedula") {
+    inputFilter = "all";
+  }
+  console.log(inputFilter);
   // console.log(filterSelect);
   const searchFetch = await fetch(
     `http://localhost:3000/api/estudiante/search?filter=${filterSelect}&value=${inputFilter}`
   );
   const responseSearch = await searchFetch.json();
+  console.log(responseSearch);
   const students = responseSearch.data;
   tableBody.innerHTML = "";
   if (students.length > 0) {
@@ -260,7 +265,6 @@ function createStudent() {
 }
 
 function handleCredentials(id) {
-  
   window.location.href = `http://localhost:5173/src/credentials/credentials.html?id=${id}`;
 }
 

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Usuarios sin permisos</title>
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+  <header>
+    <h3>Panel de administracion</h3>
+    <p id="student-name"></p>
+    <nav>
+      <ul>
+        <li><a href="../dashboard/dashboard.html">Inicio</a></li>
+        <li><a href="../createForm/createForm.html">Cargar datos</a></li>
+        <li><a href="../practicasList/practicasList.html">Practicas estudiantes</a></li>
+        <li>
+          <button type="button" id="close-session-btn" class="btn-danger">
+            Cerrar Sesion
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <h2>Lista de usuarios sin permisos</h2>
+    <section>
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre de usuario</th>
+            <th>Correo</th>
+            <th>Rol de usuario</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="tbody-table">
+          <!-- generate by JS -->
+        </tbody>
+      </table>
+    </section>
+  </main>
+  <script type="module" src="admin.js"></script>
+</body>
+</html>

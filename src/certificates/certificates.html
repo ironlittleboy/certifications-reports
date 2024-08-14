@@ -12,9 +12,10 @@
     <nav>
       <ul>
         <li><a href="../dashboard/dashboard.html">Inicio</a></li>
-        <li><a href="../createForm/createFrom.html">Cargar datos</a></li>
+        <li><a href="../createForm/createForm.html">Cargar datos</a></li>
+        <li><a href="../practicasList/practicasList.html">Practicas estudiantes</a></li>
         <li>
-          <button id="close-session-btn" class="btn-danger">
+          <button type="button" id="close-session-btn" class="btn-danger">
             Cerrar Sesion
           </button>
         </li>
@@ -28,7 +29,7 @@
         <br>
         <p>
           <span class="danger-text bold-text">Importante</span>
-          Genera un certificado para el/la estudiante, de tipo practica, matricula, o de conducta. Los estudiantes que no esten cursando sexto semeste en adelante no podran generar certificados de practicas.
+          Genera un certificado para el/la estudiante, de tipo practica, matricula, beca, o de conducta. Los estudiantes que no esten cursando sexto semeste en adelante no podran generar certificados de practicas.
         </p>
         <br>
         <form id="certificado-form">
@@ -47,6 +48,9 @@
         </form>
 
       </div>
+    </div>
+    <div class="container" id="form-or-data-show">
+     
     </div>
   </main>
   <script type="module" src="certificates.js"></script>

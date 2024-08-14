@@ -1,5 +1,5 @@
 import Swal from "sweetalert2";
-import { Toast } from "../utils/toast";
+import { Toast } from "../utils/toast.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
   try {
@@ -54,31 +54,41 @@ document
     const formData = new FormData(e.target);
     const student = Object.fromEntries(formData);
     console.log(student);
-    fetch("http://localhost:3000/api/estudiante/save-student", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-      body: JSON.stringify(student),
-    })
-      .then((response) => response.json())
-      .then((response) => {
-        if (response.status) {
-          Toast.fire({
-            icon: "success",
-            title: response.message,
-          }).then(() => {
-            window.location.href =
-              "http://localhost:5173/src/dashboard/dashboard.html";
-          });
-        } else {
-          Toast.fire({
-            icon: "error",
-            title: response.message,
-          });
+    try {
+      const studentReq = await fetch(
+        "http://localhost:3000/api/estudiante/save-student",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+          body: JSON.stringify(student),
         }
+      );
+      const response = await studentReq.json();
+      console.log(response);
+      if (response.status) {
+        Toast.fire({
+          icon: "success",
+          title: response.message,
+        }).then(() => {
+          window.location.href =
+            "http://localhost:5173/src/dashboard/dashboard.html";
+        });
+      } else {
+        Toast.fire({
+          icon: "error",
+          title: response.error,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+      Toast.fire({
+        icon: "error",
+        title: "Error al guardar el estudiante",
       });
+    }
   });
 
 document.getElementById("charge-form").addEventListener("submit", async (e) => {
@@ -94,7 +104,7 @@ document.getElementById("charge-form").addEventListener("submit", async (e) => {
     });
     return;
   }
-  console.log(formData);
+  // console.log(formData);
   Toast.fire({
     icon: "info",
     title: "Cargando archivo...",
@@ -170,4 +180,9 @@ document.getElementById("period-form").addEventListener("submit", async (e) => {
         });
       }
     });
+});
+
+document.getElementById("close-session-btn").addEventListener("click", () => {
+  localStorage.removeItem("token");
+  window.location.href = "http://localhost:5173/src/index.html";
 });

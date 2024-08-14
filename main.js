@@ -1,3 +1,4 @@
+import Swal from "sweetalert2";
 import { Toast } from "./src/utils/toast.js";
 document.getElementById("login-form").addEventListener("submit", async function (e) {
   e.preventDefault();
@@ -14,6 +15,7 @@ document.getElementById("login-form").addEventListener("submit", async function 
   })
     .then((response) => response.json())
     .then((response) => {
+      console.log(response);
       if (response.status) {
         // do something
         Toast.fire({
@@ -22,7 +24,18 @@ document.getElementById("login-form").addEventListener("submit", async function 
         }).then(() => {
           localStorage.setItem("token", response.data.token);
           // console.log(response);
-          window.location.href = "http://localhost:5173/src/dashboard/dashboard.html";
+          if (response.data.role !== "admin") {
+           Swal.fire({
+            title: "¡Bienvenido!",
+            text: "Ya esta registrado, pero debes esperar a que el administrador te de acceso",
+            icon: "success",
+            confirmButtonText: "Aceptar",
+           });
+           return;
+          } else {
+            window.location.href = "http://localhost:5173/src/dashboard/dashboard.html";
+          }
+          // window.location.href = "http://localhost:5173/src/dashboard/dashboard.html";
         });
       } else {
         Toast.fire({

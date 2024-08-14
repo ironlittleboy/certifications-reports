@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Listado de estudiantes con o sin practicas culminadas</title>
+  <link rel="stylesheet" href="practicasList.css">
+</head>
+<body>
+  <header>
+    <h3>Panel de administracion</h3>
+    <p id="student-name"></p>
+    <nav>
+      <ul>
+        <li><a href="../dashboard/dashboard.html">Inicio</a></li>
+        <li><a href="../createForm/createForm.html">Cargar datos</a></li>
+        <li><a href="practicasList.html">Practicas estduiantes</a></li>
+        <li>
+          <button id="close-session-btn" class="btn-danger">
+            Cerrar Sesion
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <h2>Listado de estudianes con o sin practicas culminadas</h2>
+    <section>
+      <div class="filtros">
+        <div class="filter-input-container">
+          <label for="practica-filter">Filtrar por practicas</label>
+          <select name="practica-filter" id="practica-filter">
+            <option value="all">Seleccionar un estado</option>
+            <option value="no-practicas">Sin terminar</option>
+            <option value="practicas">Terminadas</option>
+          </select>
+        </div>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombres</th>
+            <th>Cedula</th>
+            <th>Carrera</th>
+            <th>Correo</th>
+            <th>Semestre</th>
+            <th>Periodo</th>
+            <th>Codigo Matricula</th>
+            <th>Practicas</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="tbody-table">
+          <!-- generate by JS -->
+        </tbody>
+      </table>
+    </section>
+  </main>
+  <script type="module" src="practicasList.js"></script>
+</body>
+</html>
