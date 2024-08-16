@@ -206,6 +206,7 @@ document.getElementById("filter-button").addEventListener("click", async () => {
   console.log(responseSearch);
   const students = responseSearch.data;
   tableBody.innerHTML = "";
+  // console.log(students);
   if (students.length > 0) {
     students.forEach((student) => {
       const tr = document.createElement("tr");

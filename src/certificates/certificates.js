@@ -1,6 +1,14 @@
 import { Toast } from "../utils/toast.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
+/*   const newSelect = document.createElement("select"); //create a new select
+  newSelect.id = "nivel-practicas";
+  newSelect.name = "nivel-practicas";
+  newSelect.title = "seleccionar el nivel de las practicas";
+  newSelect.innerHTML = `
+    <option value="1">Practicas preprofesionales 1</option>
+    <option value="2">Practicas preprofesionales 2</option>
+  `; */
   //get params from url
   const urlParams = new URLSearchParams(window.location.search);
   const id = urlParams.get("id");
@@ -10,7 +18,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   );
   const res = await response.json();
   const student = res.data;
-  console.log(student);
+  console.log(res);
   // document.getElementById('student').textContent = student.Nombres;
 
   // mensaje de error si el estudiante no ha cursado los semestres necesarios para generar un certificado de practicas preprofesionales, y carga de los certificados a generar
@@ -24,6 +32,24 @@ document.addEventListener("DOMContentLoaded", async () => {
       <option value="certificado-matricula">Matricula</option>
       <option value="certificado-conducta">Conducta</option>
       <option value="certificado-beca">Beca</option>
+    `;
+  } else if (student.Id_semestre < 7 &&  res.hasReport){
+    messageBox.style.display = "block";
+    messageBox.textContent =
+      "El estudiante no ha cursado los semestres necesarios para generar un certificado de  practicas preprofesionales. El estudiante tiene reportes de conducta.";
+    certificadoType.innerHTML = `
+      <option value="certificado-matricula">Matricula</option>
+      <option value="certificado-beca">Beca</option>
+    `;
+  } else if(student.Id_semestre >= 7 && res.hasReport){
+    messageBox.style.display = "block";
+    messageBox.textContent =
+      "El estudiante tiene reportes de conducta.";
+    certificadoType.innerHTML = `
+      <option value="certificado-matricula">Matricula</option>
+      <option value="certificado-beca">Beca</option>
+      <option value="certificado-practicas">Practicas preprofesionales</option>
+
     `;
   } else {
     messageBox.style.display = "none";
@@ -45,6 +71,7 @@ document
     //get params from url
     const urlParams = new URLSearchParams(window.location.search);
     const id = urlParams.get("id");
+
     try {
       const stundentReq = await fetch(
         `http://localhost:3000/api/estudiante/get-student/${id}`
@@ -52,11 +79,21 @@ document
       const studentRes = await stundentReq.json();
       console.log(studentRes);
       const student = studentRes.data;
-
+/*       const newSelect = document.createElement("select"); //create a new select
+      newSelect.id = "nivel-practicas";
+      newSelect.name = "nivel-practicas";
+      newSelect.title = "seleccionar el nivel de las practicas";
+      newSelect.innerHTML = `
+        <option value="1">Practicas preprofesionales 1</option>
+        <option value="2">Practicas preprofesionales 2</option>
+      `;
+      const selectNivelChild = document.getElementById("nivel-practicas"); */
       if (certificadoType === "certificado-practicas") {
+/*         if (selectNivelChild) {
+          document.querySelector(".btn-container").removeChild(newSelect);
+        } */
         if (student.certificado_practicas === 0 && student.Id_semestre >= 7) {
           console.log("cargar formulario de practicas");
-
           container.innerHTML = `
           <form id="practica-form">
           <h2>Cargar datos de practicas del estudiante</h2>
@@ -76,7 +113,6 @@ document
             <label for="estado-practica">Estado de las practicas</label>
             <select name="estado-practica" id="estado-practica" title="seleccionar el estado de las practicas">
               <option value="finish">Terminadas</option>
-              <option value="in-progress">En progreso</option>
             </select>
           </div>
           <div class="input-field">
@@ -84,10 +120,10 @@ document
             <input type="text" id="docente-practicas" name="docente-practicas" placeholder="Docente tutor">
           </div>
           <div class="input-field">
-            <label for="tipo-practica">Tipo de practica</label>
-            <select name="tipo-practica" id="tipo-practica" title="seleccionar el tipo de practica">
-              <option value="profesional">Profesional</option>
-              <option value="tecnica">Tecnica</option>
+            <label for="tipo-practica">Nivel de practica</label>
+            <select name="nivel-practica" id="nivel-practica" title="seleccionar el nivel de practica">
+              <option value="1">Practicas preprofesionales I</option>
+              <option value="2">Practicas preprofesionales II</option>
             </select>
           </div>
           <div class="input-field">
@@ -113,8 +149,9 @@ document
                 document.getElementById("estado-practica").value;
               const docentePracticas =
                 document.getElementById("docente-practicas").value;
-              const tipoPracticas =
-                document.getElementById("tipo-practica").value;
+              const tipoPracticas = "Preprofesionales";
+              const nivelPracticas = document.getElementById("nivel-practica").value;
+              // const nivelPracticas = document.getElementById("nivel-practicas").value;
               const lugarPracticas =
                 document.getElementById("lugar-practicas").value;
               formData.append("fechaInicioPracticas", fechaInicioPracticas);
@@ -125,6 +162,8 @@ document
               formData.append("lugarPracticas", lugarPracticas);
               formData.append("idEstudiante", parseInt(id));
               formData.append("idPeriodo", parseInt(student.Id_periodo));
+              formData.append("nivelPracticas", parseInt(nivelPracticas));  
+              // formData.append("nivelPracticas", nivelPracticas);
               const data = Object.fromEntries(formData);
               console.log(data);
               try {
@@ -165,6 +204,7 @@ document
             );
             const response = await practicaByStudentReq.json();
             const practicas = response.data[0];
+            // document.querySelector(".btn-container").appendChild(newSelect);
             console.log(response);
             console.log(practicas.Fecha_practicas);
             const fechaInicio = new Date(
@@ -182,13 +222,15 @@ document
                     }         
                   </div>
                   <div>
+                    <span class="bold-text color-primary">
+                      Nivel de practicas: 
+                    </span> ${practicas.nivel_practicas === 1 ? "Practicas preprofesionales I" : "Practicas preprofesionales II"}
+                  </div>
+                  <div>
                     <span class="bold-text color-primary">Fecha de inicio: </span> ${fechaInicio}
                   </div>
                   <div>
-                    <span class="bold-text color-primary">Fecha de finalizacion: </span> [fecha final]
-                  </div>
-                  <div>
-                    <span class="bold-text color-primary">Horas realizadas: </span> 48
+                    <span class="bold-text color-primary">Horas realizadas: </span> 180
                   </div>
                   <div>
                     <span class="bold-text color-primary">Docente Tutor: </span> ${
@@ -218,6 +260,12 @@ document
           }
         }
       } else if (certificadoType === "certificado-beca") {
+     /*    if (selectNivelChild) {
+          document.querySelector(".btn-container").removeChild(newSelect);
+        } */
+        // if the studen have reports he can't load the data of the beca
+        console.log(student)
+        console.log(studentRes)
         //form to load the data of the student becas
         try {
           //consult if the student have a beca
@@ -375,6 +423,9 @@ document
           });
         }
       } else {
+/*         if (selectNivelChild) {
+          document.querySelector(".btn-container").removeChild(newSelect);
+        } */
         container.innerHTML = ``;
       }
     } catch (error) {
@@ -391,7 +442,7 @@ document
   .addEventListener("submit", async (event) => {
     event.preventDefault();
     const randomNumerByDate = new Date().valueOf();
-
+    
     // <span class="loader"></span>
     try {
       //colocar el loader en el boton
@@ -404,9 +455,10 @@ document
       <span class="loader"></span> Caragando...
     `;
       const certificadoType = document.getElementById("certificado-type").value;
+      const nivelPracticas = document.getElementById("nivel-practicas").value;
       const urlParams = new URLSearchParams(window.location.search);
       const id = urlParams.get("id");
-      //  console.log(certificadoType, id);
+      console.log(certificadoType, id, nivelPracticas);
 
       const response = await fetch(
         `http://localhost:3000/api/certificado/generate-certificado/${id}`,
@@ -415,7 +467,7 @@ document
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ certificadoType }),
+          body: JSON.stringify({ certificadoType, nivelPracticas }),
         }
       );
 
