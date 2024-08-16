@@ -455,10 +455,10 @@ document
       <span class="loader"></span> Caragando...
     `;
       const certificadoType = document.getElementById("certificado-type").value;
-      const nivelPracticas = document.getElementById("nivel-practicas").value;
+      // const nivelPracticas = document.getElementById("nivel-practicas").value;
       const urlParams = new URLSearchParams(window.location.search);
       const id = urlParams.get("id");
-      console.log(certificadoType, id, nivelPracticas);
+      // console.log(certificadoType, id);
 
       const response = await fetch(
         `http://localhost:3000/api/certificado/generate-certificado/${id}`,
@@ -467,7 +467,7 @@ document
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ certificadoType, nivelPracticas }),
+          body: JSON.stringify({ certificadoType }),
         }
       );
 
